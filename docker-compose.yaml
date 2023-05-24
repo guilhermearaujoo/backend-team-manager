@@ -7,7 +7,6 @@ services:
     container_name: cbc_api
     tty: true
     stdin_open: true
-    command: npm run dev
     image: node:16.4
     restart: always
     working_dir: /app

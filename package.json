@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "env $(cat .env) ts-node src/index.ts",
-    "dev": "env $(cat .env) nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"tests/**/*.test.ts\" --exec \"ts-node src/index.ts\"",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "db:reset": "env $(cat .env) npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "dev": "env $(cat .env) npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"tests/**/*.test.ts\" --exec \"ts-node src/index.ts\"",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "keywords": [],
   "author": "",
