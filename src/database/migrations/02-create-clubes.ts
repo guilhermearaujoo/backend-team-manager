@@ -15,7 +15,8 @@ export default {
         allowNull: false,
         type: DataTypes.STRING(30),
       },
-      saldo_disponivel: {
+      saldoDisponivel: {
+        field: 'saldo_disponivel',
         allowNull: false,
         type: DataTypes.DECIMAL(10, 2),
       },
