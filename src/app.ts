@@ -1,11 +1,10 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import clubeRouter from './routes/clube.route';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (_req: Request, res: Response) => {
-  res.status(200).send('Aplicação está funcionando!');
-});
+app.use('/clubes', clubeRouter);
 
 export default app;
