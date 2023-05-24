@@ -3,7 +3,7 @@ import { Clube } from '../../types/Clube';
 import db from './index';
 
 export type ClubeInputtableFields = Optional<Clube, 'id'>;
-export type UserSequelizeModel = Model<Clube, ClubeInputtableFields>;
+export type ClubeSequelizeModel = Model<Clube, ClubeInputtableFields>;
 
 type ClubeSequelizeModelCreator = ModelDefined<Clube, ClubeInputtableFields>;
 

@@ -14,6 +14,7 @@ export default {
       clube: {
         allowNull: false,
         type: DataTypes.STRING(30),
+        unique: true,
       },
       saldoDisponivel: {
         field: 'saldo_disponivel',

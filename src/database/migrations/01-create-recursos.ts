@@ -14,6 +14,7 @@ export default {
       recurso: {
         allowNull: false,
         type: DataTypes.STRING,
+        unique: true,
       },
       saldoDisponivel: {
         field: 'saldo_disponivel',
