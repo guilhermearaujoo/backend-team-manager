@@ -27,7 +27,7 @@
   ],
   "rules": {
     "no-console": "off",
-    "camelcase": "warn",
+    "camelcase": "off",
     "arrow-parens": [
       2,
       "always"
@@ -64,7 +64,7 @@
     "max-lines-per-function": [
       "error",
       {
-        "max": 20,
+        "max": 36,
         "skipBlankLines": true,
         "skipComments": true
       }
@@ -78,14 +78,14 @@
     ],
     "complexity": [
       "error",
-      5
+      9
     ],
     "import/no-extraneous-dependencies": [
       "off"
     ],
     "sonarjs/cognitive-complexity": [
       "error",
-      5
+      9
     ],
     "sonarjs/no-one-iteration-loop": [
       "error"

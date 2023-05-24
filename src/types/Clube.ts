@@ -1,5 +1,11 @@
 export type Clube = {
   id: number,
   clube: string,
-  saldoDisponivel: number,
+  saldo_disponivel: number,
+};
+
+export type ClubeUpdated = {
+  id: number,
+  saldo_anterior: number,
+  saldo_atual: number,
 };

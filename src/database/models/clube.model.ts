@@ -9,7 +9,7 @@ type ClubeSequelizeModelCreator = ModelDefined<Clube, ClubeInputtableFields>;
 
 const ClubeModel: ClubeSequelizeModelCreator = db.define('Clube', {
   clube: DataTypes.STRING,
-  saldoDisponivel: DataTypes.DECIMAL(10, 2),
+  saldo_disponivel: DataTypes.DECIMAL(10, 2),
 }, {
   tableName: 'clubes',
   timestamps: false,

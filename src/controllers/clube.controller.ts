@@ -3,9 +3,9 @@ import clubeService from '../services/clube.service';
 import mapStatusHTTP from '../utils/MapStatus.HTTP';
 
 async function create(req: Request, res: Response) {
-  const { clube, saldoDisponivel } = req.body;
+  const { clube, saldo_disponivel: saldoDisponivel } = req.body;
 
-  const serviceResponse = await clubeService.create({ clube, saldoDisponivel });
+  const serviceResponse = await clubeService.create({ clube, saldo_disponivel: saldoDisponivel });
 
   if (serviceResponse.status !== 'SUCCESSFUL') {
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);  

@@ -1,0 +1,51 @@
+export enum MessageType {
+  RECURSO_REQUIRED = 'RECURSO_REQUIRED',
+  RECURSO_NOT_FOUND = 'RECURSO_NOT_FOUND',
+  RECURSO_UPDATED = 'RECURSO_UPDATED',
+  CLUBE_REQUIRED = 'CLUBE_REQUIRED',
+  CLUBE_NOT_FOUND = 'CLUBE_NOT_FOUND',
+  CLUBE_UPDATED = 'CLUBE_UPDATED',
+  SERVER_ERROR = 'SERVER_ERROR',
+  SALDO_REQUIRED = 'SALDO_REQUIRED',
+  SALDO_NOT_NUMBER = 'SALDO_NOT_NUMBER',
+  ID_REQUIRED = 'ID_REQUIRED',
+  ID_NOT_NUMBER = 'ID_NOT_NUMBER',
+  SALDO_LESS_THAN_ZERO = 'SALDO_LESS_THAN_ZERO',
+  VALOR_CONSUMO_REQUIRED = 'VALOR_CONSUMO_REQUIRED',
+  VALOR_CONSUMO_NOT_NUMBER = 'VALOR_CONSUMO_NOT_NUMBER',
+  VALOR_CONSUMO_LESS_THAN_ZERO = 'VALOR_CONSUMO_LESS_THAN_ZERO',
+  SALDO_CLUBE_INSUFICIENT = 'SALDO_CLUBE_INSUFICIENT',
+  SALDO_RECURSO_INSUFICIENT = 'SALDO_RECURSO_INSUFICIENT',
+  CLUBE_ID_REQUIRED = 'CLUBE_ID_REQUIRED',
+  CLUBE_ID_NOT_NUMBER = 'CLUBE_ID_NOT_NUMBER',
+  RECURSO_ID_REQUIRED = 'RECURSO_ID_REQUIRED',
+  RECURSO_ID_NOT_NUMBER = 'RECURSO_ID_NOT_NUMBER',
+}
+
+export default function mapMessages(type: MessageType): string {
+  const messagesMap: Record<string, string> = {
+    RECURSO_REQUIRED: 'Recurso_id is required',
+    RECURSO_NOT_FOUND: 'Recurso not found',
+    RECURSO_UPDATED: 'Recurso updated Successfully',
+    CLUBE_REQUIRED: 'Clube_id is required',
+    CLUBE_NOT_FOUND: 'Clube not found',
+    CLUBE_UPDATED: 'Clube updated Successfully',
+    SERVER_ERROR: 'Server found a problem',
+    SALDO_REQUIRED: 'Saldo_disponivel is required',
+    SALDO_NOT_NUMBER: 'Saldo_disponivel must be a number',
+    ID_NOT_NUMBER: 'Id must be a number',
+    ID_REQUIRED: 'Id id required',
+    SALDO_LESS_THAN_ZERO: 'Saldo_disponivel must be grather than zero',
+    VALOR_CONSUMO_REQUIRED: 'Valor_consumo is required',
+    VALOR_CONSUMO_NOT_NUMBER: 'Valor_consumo must be a number',
+    VALOR_CONSUMO_LESS_THAN_ZERO: 'Valor_consumo must be grather than zero',
+    SALDO_CLUBE_INSUFICIENT: 'O saldo disponível do clube é insuficiente.',
+    SALDO_RECURSO_INSUFICIENT: 'O saldo disponível do recurso é insuficiente.',
+    CLUBE_ID_REQUIRED: 'Club_Id is required',
+    CLUBE_ID_NOT_NUMBER: 'Club_id must be a number',
+    RECURSO_ID_REQUIRED: 'Recurso_id is required',
+    RECURSO_ID_NOT_NUMBER: 'Recurso_id must be a number',
+  };
+
+  return messagesMap[type] ?? 'Server found a problem';
+}

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import clubeController from '../controllers/clube.controller';
 
-const transactionsRouter = Router();
+const clubeRouter = Router();
 
-transactionsRouter.post('/', clubeController.create);
-transactionsRouter.get('/', clubeController.list);
+clubeRouter.get('/', clubeController.list);
+clubeRouter.post('/', clubeController.create);
 
-export default transactionsRouter;
+export default clubeRouter;

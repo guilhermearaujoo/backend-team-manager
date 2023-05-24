@@ -1,15 +1,21 @@
-import ClubeModel, { 
+import ClubeModel, {
   ClubeInputtableFields,
   ClubeSequelizeModel,
 } from '../database/models/clube.model';
 
-import { Clube } from '../types/Clube';
+import { Clube, ClubeUpdated } from '../types/Clube';
+import { Update } from '../types/Update';
 import { ServiceResponse } from '../types/ServiceResponse';
-import validateParams from './validations/validateCreateFields';
+import validateParams from './validations/validateClubeFields';
+import validateUpdate from './validations/validateUpdateFields';
 
-async function create(transaction: ClubeInputtableFields): Promise<ServiceResponse<Clube>> {
+import mapMessages, { MessageType } from '../utils/MapMessages';
+import { Consumir } from '../types/Consumir';
+
+async function create(
+  transaction: ClubeInputtableFields,
+): Promise<ServiceResponse<Clube>> {
   let responseService: ServiceResponse<Clube>;
-  responseService = { status: 'SERVER_ERROR', data: { message: 'Server found a problem' } };
 
   const error = validateParams(transaction);
   if (error) {
@@ -20,27 +26,108 @@ async function create(transaction: ClubeInputtableFields): Promise<ServiceRespon
   try {
     const newClube = await ClubeModel.create(transaction);
     responseService = { status: 'SUCCESSFUL', data: newClube.dataValues };
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      responseService = { status: 'INVALID_DATA', data: { message: err.message } };
-    }
+  } catch (err: any) {
+    responseService = {
+      status: 'INVALID_DATA',
+      data: { message: err.message },
+    };
   }
-  
+
   return responseService;
 }
 
 async function list(): Promise<ServiceResponse<ClubeSequelizeModel[]>> {
   let responseService: ServiceResponse<ClubeSequelizeModel[]>;
-  responseService = { status: 'SERVER_ERROR', data: { message: 'Server found a problem' } };
-  
+
   try {
     const transactions = await ClubeModel.findAll();
     responseService = { status: 'SUCCESSFUL', data: transactions };
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      responseService = { status: 'INVALID_DATA', data: { message: err.message } };
+  } catch (err: any) {
+    responseService = {
+      status: 'INVALID_DATA',
+      data: { message: err.message },
+    };
+  }
+
+  return responseService;
+}
+
+async function getClube(
+  id: number,
+): Promise<ServiceResponse<ClubeSequelizeModel>> {
+  let responseService: ServiceResponse<ClubeSequelizeModel>;
+
+  if (!id) {
+    responseService = {
+      status: 'INVALID_DATA',
+      data: { message: mapMessages(MessageType.CLUBE_REQUIRED) },
+    };
+    return responseService;
+  }
+
+  try {
+    const recurso = await ClubeModel.findByPk(id);
+    if (!recurso) {
+      return {
+        status: 'INVALID_DATA',
+        data: { message: mapMessages(MessageType.CLUBE_NOT_FOUND) },
+      };
+    }
+
+    responseService = { status: 'SUCCESSFUL', data: recurso };
+  } catch (err: any) {
+    responseService = {
+      status: 'INVALID_DATA',
+      data: { message: err.message },
+    };
+  }
+
+  return responseService;
+}
+
+async function updateClube(
+  transaction: Update,
+): Promise<ServiceResponse<ClubeUpdated>> {
+  let responseService: ServiceResponse<ClubeUpdated>;
+
+  const error = validateUpdate(transaction);
+  if (error) {
+    responseService = { status: 'INVALID_DATA', data: { message: error } };
+    return responseService;
+  }
+
+  const clube = await getClube(transaction.id);
+  responseService = { ...clube } as ServiceResponse<ClubeUpdated>;
+
+  if (clube.status === 'SUCCESSFUL') {
+    await ClubeModel.update(
+      { saldo_disponivel: transaction.saldo_disponivel },
+      { where: { id: transaction.id } },
+    );
+
+    const updatedClube = await getClube(transaction.id);
+    if (updatedClube.status === 'SUCCESSFUL') {
+      responseService = {
+        status: 'SUCCESSFUL',
+        data: {
+          id: transaction.id,
+          saldo_anterior: clube.data.dataValues.saldo_disponivel,
+          saldo_atual: updatedClube.data.dataValues.saldo_disponivel,
+        },
+      };
     }
   }
+
+  return responseService;
+}
+
+async function consumir(
+  transaction: Consumir,
+): Promise<ServiceResponse<ClubeUpdated>> {
+  const responseService = await updateClube({
+    id: transaction.id,
+    saldo_disponivel: transaction.saldo_disponivel,
+  });
 
   return responseService;
 }
@@ -48,4 +135,7 @@ async function list(): Promise<ServiceResponse<ClubeSequelizeModel[]>> {
 export default {
   create,
   list,
+  getClube,
+  updateClube,
+  consumir,
 };

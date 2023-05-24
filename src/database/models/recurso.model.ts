@@ -3,13 +3,13 @@ import { Recurso } from '../../types/Recurso';
 import db from './index';
 
 export type RecursoInputtableFields = Optional<Recurso, 'id'>;
-export type UserSequelizeModel = Model<Recurso, RecursoInputtableFields>;
+export type RecursoSequelizeModel = Model<Recurso, RecursoInputtableFields>;
 
 type RecursoSequelizeModelCreator = ModelDefined<Recurso, RecursoInputtableFields>;
 
 const RecursoModel: RecursoSequelizeModelCreator = db.define('Recurso', {
   recurso: DataTypes.STRING,
-  saldoDisponivel: DataTypes.DECIMAL(10, 2),
+  saldo_disponivel: DataTypes.DECIMAL(10, 2),
 }, {
   tableName: 'recursos',
   timestamps: false,
