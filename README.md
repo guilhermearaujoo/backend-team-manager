@@ -1,19 +1,19 @@
-# CBC API
-App para teste técnico da CBC
+# Soccer Teams Manager
+Backend App to manage soccer teams.
 
-## Rotas disponíveis
+## Routes
 
-`GET` - listar todos os clubes
+`GET` - Show all teams
 ```
   http://localhost:3001/clubes
 ```
 
-`POST` - criar um clube
+`POST` - create a team
 ```
   http://localhost:3001/clubes
 ```
 
-`POST` - consumir recursos
+`POST` - consume resources
 ```
  http://localhost:3001/consumir
 ```
@@ -21,34 +21,34 @@ App para teste técnico da CBC
 <hr>
 <br>
 
-## Como executar?
+## How to use?
 
-Primeiro mude o nome do arquivo `.env-example` para `.env`
+Change file name `.env-example` to `.env`
 
-Após isso será necesário inicar os containers do docker
+Start docker containers
 ```bash
 docker-compose up -d
 ```
 
-Entre no container `cbc_api` para ter acesso ao terminal:
+Use docker terminal `cbc_api`:
 
 ```bash
 docker exec -it cbc_api bash
 ```
 
-Agora, já dentro do terminal, instale as dependencias
+Install dependencies
 ```bash
 npm install
 ```
 
-Rode a aplicação, isso irá criar um banco de dados já populado:
+Start the app, this will create a populated database
 ```bash
 npm run dev
 ```
 
-### Dica
+### tip
 
-Caso tenha conflitos com portas já usadas. Use os comandos:
+In case of port conflict, run:
 
 ```bash
 killall node # Parar qualquer aplicação node que esteja sendo executados na máquina!
